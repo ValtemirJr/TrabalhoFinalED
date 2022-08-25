@@ -19,5 +19,5 @@ Bebida *cadastrarBebida();
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new);
 void *compraBebida(ListaBebida *lista);
 void printListaBebida(ListaBebida *lista);
-//Bebida *vendeBebida(ListaBebida *list, ListaCliente *cliente);
+//Bebida *vendeBebida(ListaBebida *list, Cliente *cliente);
 
