@@ -27,8 +27,6 @@ int main(){
     adicionaCliente(listaCliente, cadastraCliente());
     adicionaCliente(listaCliente, cadastraCliente());
     adicionaCliente(listaCliente, cadastraCliente());
-    adicionaCliente(listaCliente, cadastraCliente());
-    adicionaCliente(listaCliente, cadastraCliente());
     mostrarClientes(listaCliente);
     
     

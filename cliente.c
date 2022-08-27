@@ -46,7 +46,7 @@ void adicionaCliente(ListaCliente *listaCliente, Cliente *new){
         listaCliente->last=new;
     }
     else{
-        for(aux = listaCliente->first; aux->next != NULL; aux = aux->next){
+        for(aux = listaCliente->first; aux != NULL; aux = aux->next){
             if(new->idade <= aux->idade){
                 new->next = aux;
                 aux->prev->next = new;
