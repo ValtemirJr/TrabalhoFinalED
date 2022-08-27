@@ -11,16 +11,18 @@
 
 int main(){
     ListaBebida *listaBebida = malloc(sizeof(ListaBebida));
-    listaBebida->first = NULL; listaBebida->last = NULL;
+    listaBebida->first = NULL;
+    listaBebida->last = NULL;
     ListaCliente *listaCliente = malloc(sizeof(ListaCliente));
-    listaCliente->first = NULL; listaCliente->last = NULL;
+    listaCliente->first = NULL; 
+    listaCliente->last = NULL;
     
     
     adicionaBebida(listaBebida, cadastrarBebida());
     adicionaBebida(listaBebida, cadastrarBebida());
     adicionaBebida(listaBebida, cadastrarBebida());
     
-    printListaBebida(listaBebida);
+    mostrarBebidas(listaBebida);
     
     return 0;
 }

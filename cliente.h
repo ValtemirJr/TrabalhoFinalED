@@ -2,7 +2,7 @@ struct _cliente{
     int codCliente;
     char nomeCliente[50];
     int cpf;
-    short int idade;
+    int idade;
     int fiado;
     struct _cliente *next;
     struct _cliente *prev;

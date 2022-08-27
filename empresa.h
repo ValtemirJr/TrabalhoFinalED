@@ -1,4 +1,4 @@
 typedef struct _empresa {
     char nomeEmpresa[50];
-    int cnpj
+    int cnpj;
 }Empresa;

@@ -27,8 +27,8 @@ Bebida *cadastrarBebida(){
     return new;
 }
 
-int listaVazia(ListaBebida *lista){
-    return(lista->first == NULL);
+int listaVazia(ListaBebida *listaBebida){
+    return(listaBebida->first == NULL);
 }
 
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new){
@@ -43,9 +43,9 @@ void adicionaBebida(ListaBebida *listaBebida, Bebida *new){
     return;
 }
 
-void printListaBebida(ListaBebida *lista){
+void mostrarBebidas(ListaBebida *listaBebida){
     Bebida *aux;
-    for(aux = lista->first; aux != NULL; aux=aux->next){
+    for(aux = listaBebida->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codBebida);
         printf("Bebida: %s\n", aux->nomeBedida);
         printf("Quantidade em ml: %.2lf\n", aux->quantMl);
