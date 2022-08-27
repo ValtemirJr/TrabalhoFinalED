@@ -15,3 +15,5 @@ typedef struct _listaCliente{
 }ListaCliente; 
 
 Cliente *cadastraCliente();
+void adicionaCliente(ListaCliente *listaCliente, Cliente *new);
+void mostrarClientes(ListaCliente *listaBebida);
