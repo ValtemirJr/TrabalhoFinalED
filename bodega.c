@@ -4,6 +4,7 @@
 
 #include "cliente.h"
 #include "bebida.h"
+#include "empresa.h"
 
 #define TAM 30
 
