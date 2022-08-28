@@ -8,7 +8,7 @@
 
 Cliente *cadastraCliente(){
     Cliente *new = malloc(sizeof(Cliente));
-    printf("Codigo: ");
+    printf("Código do Cliente: ");
     scanf("%d", &new->codCliente);
     printf("Nome do Cliente: ");
     scanf("%s", new->nomeCliente);
@@ -16,8 +16,9 @@ Cliente *cadastraCliente(){
     scanf("%d", &new->cpf);
     printf("Idade do Cliente: ");
     scanf("%d", &new->idade);
-    printf("Pode vender fiado(SIM[1] NÃO[0]): ");
+    printf("Pode vender fiado (SIM[1] NÃO[0]): ");
     scanf("%d", &new->fiado);
+    printf("\n");
     new->next = NULL;
     new->prev = NULL;
     return new;
@@ -61,10 +62,14 @@ void adicionaCliente(ListaCliente *listaCliente, Cliente *new){
 
 void mostrarClientes(ListaCliente *listaCliente){
     Cliente *aux;
+    if(listaVaziaCliente(listaCliente)){
+        printf("Não existe clientes cadastrados\n");
+        return;
+    }
     printf("-----------------------------------------------\n");
     for(aux = listaCliente->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codCliente);
-        printf("Nome:  %s\n", aux->nomeCliente);
+        printf("Nome: %s\n", aux->nomeCliente);
         printf("CPF: %d\n", aux->cpf);
         printf("Idade: %d\n", aux->idade);
         if(aux->fiado == 1)
@@ -74,6 +79,7 @@ void mostrarClientes(ListaCliente *listaCliente){
         printf("\n");
     }
     printf("-----------------------------------------------\n");
+    printf("\n");
 }
 
 Cliente *buscaCliente(ListaCliente *listaCliente){

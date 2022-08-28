@@ -9,7 +9,7 @@
 
 Bebida *cadastrarBebida(){
     Bebida *new = malloc(sizeof(Bebida));
-    printf("Codigo da Bebida: ");
+    printf("Código da Bebida: ");
     scanf("%d", &new->codBebida);
     printf("Nome da Bebida: ");
     scanf("%s", new->nomeBebida);
@@ -45,7 +45,10 @@ void adicionaBebida(ListaBebida *listaBebida, Bebida *new){
 
 void mostrarBebidas(ListaBebida *listaBebida){
     Bebida *aux;
-
+    if(listaVaziaBebida(listaBebida)){
+        printf("Não existe bebidas cadastradas\n");
+        return;
+    }
     printf("-----------------------------------------------\n");
     for(aux = listaBebida->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codBebida);
@@ -57,6 +60,7 @@ void mostrarBebidas(ListaBebida *listaBebida){
         printf("\n");
     }
         printf("-----------------------------------------------\n");
+        printf("\n");
 
 }
 
@@ -104,15 +108,11 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente, Cliente *
         }
         printf("Quantidade a ser comprada: ");
         scanf("%d", &quantBebida);
-        if (bebida->estoque < quantBebida)
-            printf("Estoque insuficiente\n"); 
-        return;
-    }
-    if (bebida->estoque < quantBebida)
+        while(bebida->estoque < quantBebida){
             printf("Estoque insuficiente\n");
-    printf("Quantidade a ser comprada: ");
-    scanf("%d", &quantBebida);
-    if (bebida->estoque < quantBebida)
-        printf("Estoque insuficiente\n"); 
+            printf("Quantidade a ser comprada: ");
+            scanf("%d", &quantBebida);
+        }
+    }
     bebida->estoque -= quantBebida;
 }
