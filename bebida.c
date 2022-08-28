@@ -50,6 +50,7 @@ void mostrarBebidas(ListaBebida *listaBebida){
         return;
     }
     printf("-----------------------------------------------\n");
+    printf("\n");
     for(aux = listaBebida->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codBebida);
         printf("Bebida: %s\n", aux->nomeBebida);

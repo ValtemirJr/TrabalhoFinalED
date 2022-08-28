@@ -67,6 +67,7 @@ void mostrarClientes(ListaCliente *listaCliente){
         return;
     }
     printf("-----------------------------------------------\n");
+    printf("\n");
     for(aux = listaCliente->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codCliente);
         printf("Nome: %s\n", aux->nomeCliente);
