@@ -54,7 +54,10 @@ void mostrarBebidas(ListaBebida *listaBebida){
         printf("Código: %d\n", aux->codBebida);
         printf("Bebida: %s\n", aux->nomeBebida);
         printf("Quantidade em ml: %.2lf\n", aux->quantMl);
-        printf("Alcoolica: %d\n", aux->alcoolica);
+        if(aux->alcoolica == 1)
+            printf("Alcoólica: SIM\n");
+        else
+            printf("Alcoólica: NÃO\n");
         printf("Preço: R$ %.2lf\n", aux->preco);
         printf("Estoque disponível: %d\n", aux->estoque);
         printf("\n");
