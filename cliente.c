@@ -75,3 +75,16 @@ void mostrarClientes(ListaCliente *listaCliente){
     }
     printf("-----------------------------------------------\n");
 }
+
+Cliente *buscaCliente(ListaCliente *listaCliente){
+    int cpf;
+    printf("CPF: ");
+    scanf("%d", &cpf);
+    Cliente *aux;
+    for(aux = listaCliente->first; aux != NULL; aux = aux->next){
+        if(aux->cpf == cpf){
+            return aux;
+        }
+    }
+    return NULL;
+}

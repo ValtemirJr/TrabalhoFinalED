@@ -18,16 +18,17 @@ int main(){
     listaCliente->last = NULL;
     
     
-/*     adicionaBebida(listaBebida, cadastrarBebida());
     adicionaBebida(listaBebida, cadastrarBebida());
     adicionaBebida(listaBebida, cadastrarBebida());
-    mostrarBebidas(listaBebida); */
+    mostrarBebidas(listaBebida);
 
-
-    adicionaCliente(listaCliente, cadastraCliente());
     adicionaCliente(listaCliente, cadastraCliente());
     adicionaCliente(listaCliente, cadastraCliente());
     mostrarClientes(listaCliente);
+
+    vendeBebida(listaBebida, listaCliente, buscaCliente(listaCliente));
+    vendeBebida(listaBebida, listaCliente, buscaCliente(listaCliente));
+    //mostrarBebidas(listaBebida);
     
     
     

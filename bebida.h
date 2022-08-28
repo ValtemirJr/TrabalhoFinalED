@@ -1,6 +1,6 @@
 struct _bebida{
     int codBebida;
-    char nomeBedida[30];
+    char nomeBebida[30];
     double quantMl;
     int alcoolica;
     double preco;
@@ -16,8 +16,9 @@ typedef struct _listaBebida{
 }ListaBebida;
 
 Bebida *cadastrarBebida();
+Bebida *buscaBebida(ListaBebida *listaBebida);
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new);
-void *compraBebida(ListaBebida *listaBebida, Bebida *bebida);
+void compraBebida(ListaBebida *listaBebida, Bebida *bebida);
 void mostrarBebidas(ListaBebida *listaBebida);
-//Bebida *vendeBebida(ListaBebida *list, Cliente *cliente);
+void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente, Cliente *cliente);
 

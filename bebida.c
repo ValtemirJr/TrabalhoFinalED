@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "bebida.h"
 #include "cliente.h"
+#include "bebida.h"
 
 #define TAM 30
 
@@ -12,7 +12,7 @@ Bebida *cadastrarBebida(){
     printf("Codigo da Bebida: ");
     scanf("%d", &new->codBebida);
     printf("Nome da Bebida: ");
-    scanf("%s", new->nomeBedida);
+    scanf("%s", new->nomeBebida);
     printf("Quantidade da bebida em ml: ");
     scanf("%lf", &new->quantMl);
     printf("Quantidade em estoque: ");
@@ -49,7 +49,7 @@ void mostrarBebidas(ListaBebida *listaBebida){
     printf("-----------------------------------------------\n");
     for(aux = listaBebida->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codBebida);
-        printf("Bebida: %s\n", aux->nomeBedida);
+        printf("Bebida: %s\n", aux->nomeBebida);
         printf("Quantidade em ml: %.2lf\n", aux->quantMl);
         printf("Alcoolica: %d\n", aux->alcoolica);
         printf("Preço: R$ %.2lf\n", aux->preco);
@@ -58,4 +58,61 @@ void mostrarBebidas(ListaBebida *listaBebida){
     }
         printf("-----------------------------------------------\n");
 
+}
+
+Bebida *buscaBebida(ListaBebida *listaBebida){
+    Bebida *aux;
+    int key;
+    printf("Código da Bebida: ");
+    scanf("%d", &key);
+    for(aux = listaBebida->first; aux != NULL; aux = aux->next){
+        if(aux->codBebida == key){
+            return aux;
+        }
+    }
+    return NULL;
+}
+
+
+void compraBebida(ListaBebida *listaBebida, Bebida *bebida){
+    int quantBebida;
+    if (bebida == NULL){
+        printf("Bebida não encontrada\n");
+    }
+    printf("Bebida: %s\n", bebida->nomeBebida); 
+    printf("Quantidade em estoque: %d\n", bebida->estoque);
+    printf("Adicionar em estoque: ");
+    scanf("%d", &quantBebida);
+    bebida->estoque += quantBebida;
+    printf("Estoque atualizado: %d\n", bebida->estoque);
+}
+
+
+//Verificar integridade
+void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente, Cliente *cliente){
+    int quantBebida;
+    Bebida *bebida;
+    bebida = buscaBebida(listaBebida);
+    while(bebida == NULL){
+        printf("Bebida não encontrada\n");
+        bebida = buscaBebida(listaBebida);
+    }
+    if (bebida->alcoolica){
+        if (cliente->idade < 18){
+            printf("Venda não autorizada\n");
+            return;
+        }
+        printf("Quantidade a ser comprada: ");
+        scanf("%d", &quantBebida);
+        if (bebida->estoque < quantBebida)
+            printf("Estoque insuficiente\n"); 
+        return;
+    }
+    if (bebida->estoque < quantBebida)
+            printf("Estoque insuficiente\n");
+    printf("Quantidade a ser comprada: ");
+    scanf("%d", &quantBebida);
+    if (bebida->estoque < quantBebida)
+        printf("Estoque insuficiente\n"); 
+    bebida->estoque -= quantBebida;
 }
