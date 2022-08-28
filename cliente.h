@@ -18,3 +18,4 @@ Cliente *cadastraCliente();
 Cliente *buscaCliente(ListaCliente *listaCliente);
 void adicionaCliente(ListaCliente *listaCliente, Cliente *new);
 void mostrarClientes(ListaCliente *listaBebida);
+int freeListaCliente(ListaCliente *lista);

@@ -18,7 +18,7 @@ typedef struct _listaBebida{
 Bebida *cadastrarBebida();
 Bebida *buscaBebida(ListaBebida *listaBebida);
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new);
-void compraBebida(ListaBebida *listaBebida, Bebida *bebida);
+void compraBebida(ListaBebida *listaBebida);
 void mostrarBebidas(ListaBebida *listaBebida);
-void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente, Cliente *cliente);
-
+void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente);
+int freeListaBebida(ListaBebida *lista);

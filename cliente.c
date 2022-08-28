@@ -95,3 +95,16 @@ Cliente *buscaCliente(ListaCliente *listaCliente){
     }
     return NULL;
 }
+
+int freeListaCliente(ListaCliente *lista){
+    Cliente *aux;
+    aux = lista->first;
+    int i = 0;
+    while(aux != NULL){
+        lista->first = lista->first->next;
+        free(aux);
+        aux = lista->first;
+        i++;
+    }
+    return i;
+}
