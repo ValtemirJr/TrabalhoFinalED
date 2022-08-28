@@ -7,10 +7,14 @@
 
 #define TAM 30
 
-Bebida *cadastrarBebida(){
+Bebida *cadastrarBebida(ListaBebida *listaBebida){
     Bebida *new = malloc(sizeof(Bebida));
     printf("Código da Bebida: ");
     scanf("%d", &new->codBebida);
+    while(buscaBebida(listaBebida, new->codBebida) != NULL){
+        printf("Código já cadastrado, insira um válido: ");
+        scanf("%d", &new->codBebida);
+    }
     printf("Nome da Bebida: ");
     scanf("%s", new->nomeBebida);
     printf("Quantidade da bebida em ml: ");
@@ -67,11 +71,8 @@ void mostrarBebidas(ListaBebida *listaBebida){
     printf("\n");
 }
 
-Bebida *buscaBebida(ListaBebida *listaBebida){
+Bebida *buscaBebida(ListaBebida *listaBebida, int cod){
     Bebida *aux;
-    int cod;
-    printf("Código da Bebida: ");
-    scanf("%d", &cod);
     for(aux = listaBebida->first; aux != NULL; aux = aux->next){
         if(aux->codBebida == cod){
             return aux;
@@ -81,13 +82,15 @@ Bebida *buscaBebida(ListaBebida *listaBebida){
 }
 
 void compraBebida(ListaBebida *listaBebida){
-    int quantBebida;
+    int quantBebida, cod;
     Bebida *bebida;
     if(listaVaziaBebida(listaBebida)){
         printf("Não existe bebidas cadastradas\n");
         return;
     }
-    bebida = buscaBebida(listaBebida);
+    printf("Código da Bebida: ");
+    scanf("%d", &cod);
+    bebida = buscaBebida(listaBebida, cod);
     if (bebida == NULL){
         printf("Bebida não encontrada\n");
     }
@@ -97,14 +100,16 @@ void compraBebida(ListaBebida *listaBebida){
         printf("Adicionar em estoque: ");
         scanf("%d", &quantBebida);
         bebida->estoque += quantBebida;
-        printf("Estoque atualizado: %d\n", bebida->estoque);
+        printf("Estoque atualizado: %d\n\n", bebida->estoque);
     }
 }
 
 void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
-    int quantBebida;
+    int quantBebida, cod, cpf;
     Bebida *bebida;
-    Cliente *cliente = buscaCliente(listaCliente);
+    printf("CPF do Cliente: ");
+    scanf("%d", &cpf);
+    Cliente *cliente = buscaCliente(listaCliente, cpf);
     if(cliente == NULL){
         printf("Cliente não encontrado\n");
         return;
@@ -114,7 +119,9 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
         printf("Não existe bebidas cadastradas\n");
         return;
     }
-    bebida = buscaBebida(listaBebida);
+    printf("Código da Bebida: ");
+    scanf("%d", &cod);
+    bebida = buscaBebida(listaBebida, cod);
     while(bebida == NULL){
         printf("Bebida não encontrada\n");
         return;
@@ -138,6 +145,7 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
         }
     }
     bebida->estoque -= quantBebida;
+    printf("\n");
 }
 
 int freeListaBebida(ListaBebida *lista){

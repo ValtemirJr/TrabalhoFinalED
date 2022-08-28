@@ -14,8 +14,8 @@ typedef struct _listaCliente{
     Cliente *last;
 }ListaCliente; 
 
-Cliente *cadastraCliente();
-Cliente *buscaCliente(ListaCliente *listaCliente);
+Cliente *cadastraCliente(ListaCliente *listaCliente);
+Cliente *buscaCliente(ListaCliente *listaCliente, int key);
 void adicionaCliente(ListaCliente *listaCliente, Cliente *new);
 void mostrarClientes(ListaCliente *listaBebida);
 int freeListaCliente(ListaCliente *lista);

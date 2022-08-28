@@ -6,14 +6,22 @@
 
 #define TAM 30
 
-Cliente *cadastraCliente(){
+Cliente *cadastraCliente(ListaCliente *listaCliente){
     Cliente *new = malloc(sizeof(Cliente));
     printf("Código do Cliente: ");
     scanf("%d", &new->codCliente);
+    while(buscaCliente(listaCliente, new->codCliente)){
+        printf("Código já cadastrado, insira um válido: ");
+        scanf("%d", &new->codCliente);
+    }
     printf("Nome do Cliente: ");
     scanf("%s", new->nomeCliente);
     printf("CPF do Cliente: ");
     scanf("%d", &new->cpf);
+    while(buscaCliente(listaCliente, new->cpf)){
+        printf("CPF já cadastrado, insira um válido: ");
+        scanf("%d", &new->cpf);
+    }
     printf("Idade do Cliente: ");
     scanf("%d", &new->idade);
     printf("Pode vender fiado (SIM[1] NÃO[0]): ");
@@ -83,13 +91,10 @@ void mostrarClientes(ListaCliente *listaCliente){
     printf("\n");
 }
 
-Cliente *buscaCliente(ListaCliente *listaCliente){
-    int cpf;
-    printf("CPF: ");
-    scanf("%d", &cpf);
+Cliente *buscaCliente(ListaCliente *listaCliente, int key){
     Cliente *aux;
     for(aux = listaCliente->first; aux != NULL; aux = aux->next){
-        if(aux->cpf == cpf){
+        if(aux->cpf == key || aux->codCliente == key){
             return aux;
         }
     }

@@ -33,7 +33,7 @@ int main(){
         scanf("%d", &opcao);
         printf("\n");
         if(opcao == 1){
-            adicionaBebida(listaBebida, cadastrarBebida());
+            adicionaBebida(listaBebida, cadastrarBebida(listaBebida));
         }
         else if(opcao == 2){
             mostrarBebidas(listaBebida);
@@ -45,7 +45,7 @@ int main(){
             vendeBebida(listaBebida, listaCliente);
         }
         else if(opcao == 5){
-            adicionaCliente(listaCliente, cadastraCliente());
+            adicionaCliente(listaCliente, cadastraCliente((listaCliente)));
         }
         else if(opcao == 6){
             mostrarClientes(listaCliente);
