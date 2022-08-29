@@ -1,7 +1,7 @@
 struct _bebida{
     int codBebida;
     char nomeBebida[30];
-    double quantMl;
+    int quantMl;
     int alcoolica;
     double preco;
     int estoque;
@@ -22,3 +22,4 @@ void compraBebida(ListaBebida *listaBebida);
 void mostrarBebidas(ListaBebida *listaBebida);
 void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente);
 int freeListaBebida(ListaBebida *lista);
+int listaVaziaBebida(ListaBebida *listaBebida);

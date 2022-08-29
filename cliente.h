@@ -19,3 +19,4 @@ Cliente *buscaCliente(ListaCliente *listaCliente, int key);
 void adicionaCliente(ListaCliente *listaCliente, Cliente *new);
 void mostrarClientes(ListaCliente *listaBebida);
 int freeListaCliente(ListaCliente *lista);
+int listaVaziaCliente(ListaCliente *listaCliente);

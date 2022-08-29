@@ -18,11 +18,15 @@ Bebida *cadastrarBebida(ListaBebida *listaBebida){
     printf("Nome da Bebida: ");
     scanf("%s", new->nomeBebida);
     printf("Quantidade da bebida em ml: ");
-    scanf("%lf", &new->quantMl);
+    scanf("%d", &new->quantMl);
     printf("Quantidade em estoque: ");
     scanf("%d", &new->estoque);
     printf("Bebida alcoolica (SIM[1]  NÃO[0]): ");
     scanf("%d", &new->alcoolica);
+    while (new->alcoolica != 1 && new->alcoolica != 0){
+        printf("Escolha a opção válida (SIM[1]  NÃO[0]): ");
+        scanf("%d", &new->alcoolica);
+    }
     printf("Preço da Bebida: ");
     scanf("%lf", &new->preco);
     printf("\n");
@@ -50,7 +54,7 @@ void adicionaBebida(ListaBebida *listaBebida, Bebida *new){
 void mostrarBebidas(ListaBebida *listaBebida){
     Bebida *aux;
     if(listaVaziaBebida(listaBebida)){
-        printf("Não existe bebidas cadastradas\n");
+        printf("Não existe bebidas cadastradas\n\n");
         return;
     }
     printf("-----------------------------------------------\n");
@@ -58,7 +62,7 @@ void mostrarBebidas(ListaBebida *listaBebida){
     for(aux = listaBebida->first; aux != NULL; aux=aux->next){
         printf("Código: %d\n", aux->codBebida);
         printf("Bebida: %s\n", aux->nomeBebida);
-        printf("Quantidade em ml: %.2lf\n", aux->quantMl);
+        printf("Quantidade em ml: %d\n", aux->quantMl);
         if(aux->alcoolica == 1)
             printf("Alcoólica: SIM\n");
         else
@@ -85,7 +89,7 @@ void compraBebida(ListaBebida *listaBebida){
     int quantBebida, cod;
     Bebida *bebida;
     if(listaVaziaBebida(listaBebida)){
-        printf("Não existe bebidas cadastradas\n");
+        printf("Não existe bebidas cadastradas\n\n");
         return;
     }
     printf("Código da Bebida: ");
@@ -107,16 +111,24 @@ void compraBebida(ListaBebida *listaBebida){
 void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
     int quantBebida, cod, cpf;
     Bebida *bebida;
+    if(listaVaziaBebida(listaBebida)){
+        printf("Não existe bebidas cadastradas\n\n");
+        return;
+    }
+    if(listaVaziaCliente(listaCliente)){
+        printf("Não existe clientes cadastrados\n\n");
+        return;
+    }
     printf("CPF do Cliente: ");
     scanf("%d", &cpf);
     Cliente *cliente = buscaCliente(listaCliente, cpf);
     if(cliente == NULL){
-        printf("Cliente não encontrado\n");
+        printf("Cliente não encontrado\n\n");
         return;
     }
     printf("Cliente: %s\n", cliente->nomeCliente);
     if(listaVaziaBebida(listaBebida)){
-        printf("Não existe bebidas cadastradas\n");
+        printf("Não existe bebidas cadastradas\n\n");
         return;
     }
     printf("Código da Bebida: ");
@@ -129,15 +141,28 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
     printf("Bebida: %s\n", bebida->nomeBebida);
     if(bebida->alcoolica){
         if (cliente->idade < 18){
-            printf("Menor de idade, venda não autorizada!\n");
+            printf("Menor de idade, venda não autorizada!\n\n");
             return;
         }
         printf("Quantidade a ser comprada: ");
         scanf("%d", &quantBebida);
         if(bebida->estoque == 0){
-            printf("Sem estoque!\n");
+            printf("Sem estoque!\n\n");
             return;
         }
+        while(bebida->estoque < quantBebida){
+            printf("Estoque insuficiente\n");
+            printf("Quantidade a ser comprada: ");
+            scanf("%d", &quantBebida);
+        }
+    }
+    else {
+        printf("Quantidade a ser comprada: ");
+        scanf("%d", &quantBebida);
+        if(bebida->estoque == 0){
+            printf("Sem estoque!\n\n");
+            return;
+            }
         while(bebida->estoque < quantBebida){
             printf("Estoque insuficiente\n");
             printf("Quantidade a ser comprada: ");

@@ -26,6 +26,10 @@ Cliente *cadastraCliente(ListaCliente *listaCliente){
     scanf("%d", &new->idade);
     printf("Pode vender fiado (SIM[1] NÃO[0]): ");
     scanf("%d", &new->fiado);
+        while(new->fiado != 1 && new->fiado != 0){
+        printf("Escolha a opção válida (SIM[1]  NÃO[0]): ");
+        scanf("%d", &new->fiado);
+    }
     printf("\n");
     new->next = NULL;
     new->prev = NULL;
@@ -71,7 +75,7 @@ void adicionaCliente(ListaCliente *listaCliente, Cliente *new){
 void mostrarClientes(ListaCliente *listaCliente){
     Cliente *aux;
     if(listaVaziaCliente(listaCliente)){
-        printf("Não existe clientes cadastrados\n");
+        printf("Não existe clientes cadastrados\n\n");
         return;
     }
     printf("-----------------------------------------------\n");

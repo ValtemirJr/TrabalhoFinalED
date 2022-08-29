@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>     //windows
+#include <windows.h>    //windows
 
 #include "cliente.h"
 #include "bebida.h"
@@ -19,6 +21,8 @@ void printMenu(){
 }
 
 int main(){
+    UINT CPAGE_UTF8 = 65001;            //windows
+    SetConsoleOutputCP(CPAGE_UTF8);     //windows
     ListaBebida *listaBebida = malloc(sizeof(ListaBebida));
     listaBebida->first = NULL;  
     listaBebida->last = NULL;
