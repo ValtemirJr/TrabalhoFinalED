@@ -21,5 +21,6 @@ void adicionaBebida(ListaBebida *listaBebida, Bebida *new);
 void compraBebida(ListaBebida *listaBebida);
 void mostrarBebidas(ListaBebida *listaBebida);
 void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente);
+int verificaVenda(ListaBebida *listaBebida, ListaCliente *listaCliente);
 int freeListaBebida(ListaBebida *lista);
 int listaVaziaBebida(ListaBebida *listaBebida);

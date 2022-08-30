@@ -4,18 +4,34 @@
 
 #include "cliente.h"
 
-#define TAM 30
+int verificaNome(const char nome[]){
+    int i;
+    for(i = 0; i<strlen(nome); i++){
+        if(nome[i] >= 48 && nome[i] <= 57 ){
+            return 0;
+        }       
+    }
+    return 1;
+}
 
 Cliente *cadastraCliente(ListaCliente *listaCliente){
     Cliente *new = malloc(sizeof(Cliente));
     printf("Código do Cliente: ");
     scanf("%d", &new->codCliente);
+    while(new->codCliente < 0){
+        printf("O código deve ser número positivo: ");
+        scanf("%d", &new->codCliente);
+    }
     while(buscaCliente(listaCliente, new->codCliente)){
         printf("Código já cadastrado, insira um válido: ");
         scanf("%d", &new->codCliente);
     }
     printf("Nome do Cliente: ");
     scanf("%s", new->nomeCliente);
+    while(!verificaNome(new->nomeCliente)){
+        printf("Nome invalido, insira novamente: ");
+        scanf("%s", new->nomeCliente);
+    }
     printf("CPF do Cliente: ");
     scanf("%d", &new->cpf);
     while(buscaCliente(listaCliente, new->cpf)){
