@@ -15,6 +15,7 @@ typedef struct _listaBebida{
     Bebida *last;
 }ListaBebida;
 
+
 Bebida *cadastrarBebida(ListaBebida *listaBebida);
 Bebida *buscaBebida(ListaBebida *listaBebida, int cod);
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new);

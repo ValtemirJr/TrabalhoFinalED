@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "carrinho.h"
 #include "cliente.h"
 #include "bebida.h"
+
 
 Bebida *cadastrarBebida(ListaBebida *listaBebida){
     Bebida *new = malloc(sizeof(Bebida));
@@ -14,7 +16,7 @@ Bebida *cadastrarBebida(ListaBebida *listaBebida){
         scanf("%d", &new->codBebida);
     }
     while(buscaBebida(listaBebida, new->codBebida) != NULL){
-        printf("Código já cadastrado, insira um válido: ");
+        printf("Código já cadastrado, insira um novo: ");
         scanf("%d", &new->codBebida);
     }
     printf("Nome da Bebida: ");
@@ -41,6 +43,11 @@ Bebida *cadastrarBebida(ListaBebida *listaBebida){
     }
     printf("Preço da Bebida: ");
     scanf("%lf", &new->preco);
+    while(new->preco < 0.1){
+        printf("O estoque não pode ser negativo.\n");
+        printf("Digite novamente: ");
+        scanf("%lf", &new->preco);
+    }
     printf("\n");
     new->next = NULL;
     new->prev = NULL;
@@ -53,13 +60,14 @@ int listaVaziaBebida(ListaBebida *listaBebida){
 
 void adicionaBebida(ListaBebida *listaBebida, Bebida *new){
     if(listaVaziaBebida(listaBebida)){
-        listaBebida->first =  new;
+        listaBebida->first = new;
         listaBebida->last = new;
-        return;
     }
-    new->prev = listaBebida->last;
-    new->prev->next = new;
-    listaBebida->last= new; 
+    else{
+        new->prev = listaBebida->last;
+        new->prev->next = new;
+        listaBebida->last = new; 
+    }
     return;
 }
 
@@ -133,11 +141,15 @@ int verificaVenda(ListaBebida *listaBebida, ListaCliente *listaCliente){
 }
 
 void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
+    ListaCompra *listaCompra = malloc(sizeof(ListaCompra));
+    listaCompra->first = NULL;
+    listaCompra->last = NULL;
+    Carrinho *item, *itemAux;
     int quantBebida, cod, cpf;
     Bebida *bebida;
     Cliente *cliente;
     if(!verificaVenda(listaBebida, listaCliente))
-        return;  
+        return; 
     printf("CPF do Cliente: ");
     scanf("%d", &cpf);
     cliente = buscaCliente(listaCliente, cpf);
@@ -150,12 +162,15 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
         printf("\nPara encerrar a compra digite -1 como codigo.\n\n");
         printf("Codigo da bebida: ");
         scanf("%d", &cod);
-        if(cod == -1)
+        if(cod == -1){
+            notaFiscal(listaCompra);
             return;
+        }
         bebida = buscaBebida(listaBebida, cod);
         if(!bebida)
             printf("Codigo inválido.\n");
         while(bebida){
+            printf("Bebida: %s\n", bebida->nomeBebida);
             if(!bebida->estoque){
                 printf("Sem estoque!\n");
                 break;
@@ -168,13 +183,20 @@ void vendeBebida(ListaBebida *listaBebida, ListaCliente *listaCliente){
             }
             printf("Quantidade: ");
             scanf("%d", &quantBebida);
-            while(quantBebida > bebida->estoque){
-                printf("Estoque insuficinete!\n");
+            while(quantBebida > bebida->estoque || quantBebida <= 0){
+                printf("Quantidade inválida!\n");
                 printf("Estoque atual: %d\n", bebida->estoque);
                 printf("Quantidade: ");
                 scanf("%d", &quantBebida);
             }
             bebida->estoque -= quantBebida;
+            item = criaItem(listaCompra, bebida->codBebida, bebida->nomeBebida, bebida->preco, quantBebida);
+            itemAux = buscaItem(listaCompra, item);
+            if(!itemAux)
+                adicionaCarrinho(listaCompra, item);
+            else{
+                itemAux->quant += quantBebida;
+            }
             break;
         }
     }

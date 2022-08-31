@@ -23,7 +23,7 @@ Cliente *cadastraCliente(ListaCliente *listaCliente){
         scanf("%d", &new->codCliente);
     }
     while(buscaCliente(listaCliente, new->codCliente)){
-        printf("Código já cadastrado, insira um válido: ");
+        printf("Código já cadastrado, insira um novo: ");
         scanf("%d", &new->codCliente);
     }
     printf("Nome do Cliente: ");
@@ -35,7 +35,7 @@ Cliente *cadastraCliente(ListaCliente *listaCliente){
     printf("CPF do Cliente: ");
     scanf("%d", &new->cpf);
     while(buscaCliente(listaCliente, new->cpf)){
-        printf("CPF já cadastrado, insira um válido: ");
+        printf("CPF já cadastrado, insira um novo: ");
         scanf("%d", &new->cpf);
     }
     printf("Idade do Cliente: ");
@@ -55,7 +55,6 @@ Cliente *cadastraCliente(ListaCliente *listaCliente){
 int listaVaziaCliente(ListaCliente *listaCliente){
     return(listaCliente->first == NULL);
 }
-
 
 void adicionaCliente(ListaCliente *listaCliente, Cliente *new){
     Cliente *aux;

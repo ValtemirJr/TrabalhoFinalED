@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "carrinho.h"
 #include "cliente.h"
 #include "bebida.h"
 #include "empresa.h"
+
+
 
 void printMenu(){
     printf("1 - Cadastrar bebida\n");
@@ -55,7 +58,6 @@ int main(){
             break;
         }
         else if(opcao > 7 || opcao < 1){
-
             printf("Opção invalida!\n\n");
         }
     } 
